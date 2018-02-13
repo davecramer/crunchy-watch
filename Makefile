@@ -18,7 +18,7 @@ clean:
 
 resolve:
 	@echo "Resolving dependencies..."
-	@glide install
+	@godep get
 
 build:
 	@echo "Building crunchy-watch..."
