@@ -27,7 +27,7 @@ script:
 - cd crunchydata
 - git clone https://github.com/CrunchyData/crunchy-containers.git
 - cd crunchy-containers
-- git checkout 1.7.2
+ #- git checkout 1.7.2
 - go get github.com/blang/expenv
 - cd examples/kube/primary-replica/
 - kubectl create -f $CCPROOT/conf/demo-namespace.json
