@@ -44,7 +44,7 @@ script:
 - export CCP_PGVERSION=10
 - export CCP_PG_FULLVERSION=10.2
 - cd $GOPATH/src/github.com/crunchydata
-- mv $HOME/crunchy-watch .
+- mv $TRAVIS_BUILD_DIR/../crunchy-watch .
 - cd crunchy-watch
 - make setup
 - make
