@@ -18,7 +18,8 @@ before_script:
     until kubectl get nodes -o jsonpath="$JSONPATH" 2>&1 | grep -q "Ready=True"; do sleep 1; done
 
 script:
-- export PATH=$PATH:$HOME/go/bin
+#make sure go is version 1.8 or better  
+- export PATH=$HOME/go/bin:$PATH
 - export GOPATH=$HOME/cdev
 - export GOBIN=$GOPATH/bin
 - export PATH=$PATH:$GOBIN
