@@ -1,5 +1,9 @@
 sudo: required
 
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get -qq install coreutils
+  
 env:
 - CHANGE_MINIKUBE_NONE_USER=true
 
