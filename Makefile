@@ -51,6 +51,7 @@ docker-image:
 
 setup:
 	@echo "Downloading tools..."
+	go get -u github.com/tools/godep
 	mkdir -p $(TOOLS_DIR)
 	@echo "Downloading kubectl..."
 	@curl -o $(TOOLS_DIR)/kubectl https://storage.googleapis.com/kubernetes-release/release/$(shell curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
