@@ -18,9 +18,7 @@ clean:
 
 resolve:
 	@echo "Resolving dependencies..."
-	@godep get
-
-#force build
+	@godep get -v
 
 build:
 	@echo "Building crunchy-watch..."
