@@ -10,7 +10,6 @@ env:
 before_script:
 - mkdir $HOME/cdev $HOME/cdev/src $HOME/cdev/pkg $HOME/cdev/bin
 - sudo apt-get update -qq
-#- curl https://storage.googleapis.com/golang/go1.8.7.linux-amd64.tar.gz | tar -xzf -
 - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl 
 - chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 - curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -21,8 +20,6 @@ before_script:
     until kubectl get nodes -o jsonpath="$JSONPATH" 2>&1 | grep -q "Ready=True"; do sleep 1; done
 
 script:
-#make sure go is version 1.8 or better  
-#- export PATH=$HOME/go/bin:$PATH
 - export GOPATH=$HOME/cdev
 - export GOBIN=$GOPATH/bin
 - export PATH=$PATH:$GOBIN
@@ -40,7 +37,6 @@ script:
 - ./run.sh
 - docker ps 
 
-- which go
 - export GOPATH=$HOME/odev
 - mkdir -p $GOPATH/src $GOPATH/bin $GOPATH/pkg
 - mkdir -p $GOPATH/src/github.com/crunchydata/
@@ -57,4 +53,5 @@ script:
 - make
 - make docker-image
 - cd examples/kube
+- export CCP_IMAGE_TAG=centos7-10.2-1.8.0
 - ./run.sh
