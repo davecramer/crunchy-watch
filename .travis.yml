@@ -5,6 +5,9 @@ env:
 - CHANGE_MINIKUBE_NONE_USER=true
 
 before_script:
+- mkdir $HOME/cdev $HOME/cdev/src $HOME/cdev/pkg $HOME/cdev/bin
+- sudo apt-get update -qq
+- sudo apt-get install golang-go -qq
 - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl 
 - chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 - curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -15,8 +18,20 @@ before_script:
     until kubectl get nodes -o jsonpath="$JSONPATH" 2>&1 | grep -q "Ready=True"; do sleep 1; done
 
 script:
+- export GOPATH=$HOME/cdev
+- export GOBIN=$GOPATH/bin
+- export PATH=$PATH:$GOBIN
+- export CCPROOT=$GOPATH/src/github.com/crunchydata/crunchy-containers
+- cd $GOPATH
+- mkdir crunchydata
+- cd crunchydata
 - git clone https://github.com/CrunchyData/crunchy-containers.git
-- pushd crunchy-containers/examples/kube/primary-replica/
+- cd crunchy-containers
+- git checkout 1.8.0
+- go get github.com/blang/expenv
+- cd examples/kube/primary-replica/
+- kubectl create -f $CCPROOT/conf/demo-namespace.json
+- kubectl config set-context $(kubectl config current-context) --namespace=demo
 - ./run.sh
 - docker ps 
 
