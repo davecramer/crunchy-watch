@@ -20,6 +20,8 @@ resolve:
 	@echo "Resolving dependencies..."
 	@godep get
 
+#force build
+
 build:
 	@echo "Building crunchy-watch..."
 	@go build -i -o $(BUILD_DIR)/crunchy-watch \
