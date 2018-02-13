@@ -36,6 +36,7 @@ script:
 - ./run.sh
 - docker ps 
 
+- go version
 - export GOPATH=$HOME/odev
 - mkdir -p $GOPATH/src $GOPATH/bin $GOPATH/pkg
 - mkdir -p $GOPATH/src/github.com/crunchydata/
@@ -48,6 +49,7 @@ script:
 - cp -rp $TRAVIS_BUILD_DIR/* crunchy-watch 
 - cd crunchy-watch
 - make setup
+- godep version
 - make
 - make docker-image
 - cd examples/kube
