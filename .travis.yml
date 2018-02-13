@@ -7,7 +7,7 @@ env:
 before_script:
 - mkdir $HOME/cdev $HOME/cdev/src $HOME/cdev/pkg $HOME/cdev/bin
 - sudo apt-get update -qq
-- sudo apt-get install golang-go -qq
+- sudo apt-get install golang-go gettext -qq
 - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl 
 - chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 - curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -35,3 +35,20 @@ script:
 - ./run.sh
 - docker ps 
 
+- export GOPATH=$HOME/odev
+- mkdir -p $GOPATH/src $GOPATH/bin $GOPATH/pkg
+- mkdir -p $GOPATH/src/github.com/crunchydata/
+- export PATH=$PATH:$GOPATH/bin
+- export CCP_BASEOS=centos7
+- export CCP_PGVERSION=10
+- export CCP_PG_FULLVERSION=10.2
+- cd $GOPATH/src/github.com/crunchydata
+- git clone https://github.com/CrunchyData/crunchy-watch.git
+- cd crunchy-watch
+- go get github.com/Masterminds/glide
+- glide update
+- make setup
+- make
+- make docker-image
+- cd examples/kube
+- ./run.sh
