@@ -21,7 +21,7 @@ script:
 - export GOPATH=$HOME/cdev
 - export GOBIN=$GOPATH/bin
 - export PATH=$PATH:$GOBIN
-- export CCPROOT=$GOPATH/src/github.com/crunchydata/crunchy-containers
+- export CCPROOT=$GOPATH/crunchydata/crunchy-containers
 - cd $GOPATH
 - mkdir crunchydata
 - cd crunchydata
