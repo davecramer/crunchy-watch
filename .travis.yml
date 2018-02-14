@@ -53,5 +53,5 @@ script:
 - make
 - make docker-image
 - cd examples/kube
-- export CCP_IMAGE_TAG=centos7-10.2-1.8.0
+- export CCP_IMAGE_TAG=centos7-travis
 - ./run.sh
